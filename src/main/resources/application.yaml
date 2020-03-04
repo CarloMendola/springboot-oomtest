@@ -8,3 +8,4 @@ server:
   port: "8080"
 
 byteLength: 500000  # 500 Kbyte
+disableScheduled: true

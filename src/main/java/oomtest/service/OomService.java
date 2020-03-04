@@ -17,6 +17,8 @@ public class OomService {
 
 	@Value("${byteLength}")
 	Integer size;
+	@Value("${disableScheduled:false}")
+	Boolean disableScheduled;
 
 	HashMap<String,Byte[]> map ;
 
@@ -27,6 +29,14 @@ public class OomService {
 	}
 
 	@Scheduled(initialDelay = 3000, fixedDelay=Long.MAX_VALUE)
+	public void scheduledOutOfMemory() {
+		if(disableScheduled==false) {
+			goOutOfMemory();
+		} else {
+			log.info("oom via scheduled disabled by configuration");
+		}
+	}
+	
 	public void goOutOfMemory() {
 		try {
 			Long l=0L;
