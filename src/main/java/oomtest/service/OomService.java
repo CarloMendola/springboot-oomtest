@@ -47,7 +47,7 @@ public class OomService {
 				this.map.put(UUID.randomUUID().toString(), generateByteArray(this.size));
 				l+=1;
 			}
-		} catch (OutOfMemoryError e) {
+		} catch (Exception e) {
 			Runtime runtime = Runtime.getRuntime();
 			long memory = runtime.totalMemory() - runtime.freeMemory();
 			log.error("------------------>>>   OutOfMemory at (KB): " + memory/1000 , e);

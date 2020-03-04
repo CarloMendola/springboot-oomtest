@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,10 +28,12 @@ public class OomApi {
     @Autowired OomService oomService;
     
     @RequestMapping(value = "/oom", produces = { MediaType.APPLICATION_JSON_VALUE }, method = RequestMethod.GET)
-    public ResponseEntity<String> getHealth() {
+    public ResponseEntity<String> getHealth(@RequestParam Boolean triggerOom) {
         try {
-            log.debug("trigger oom from api");
-            oomService.goOutOfMemory();
+            log.debug("trigger oom from api: {}",triggerOom);
+            if(triggerOom) {
+            	oomService.goOutOfMemory();            	
+            }
             return new ResponseEntity<>(mapper.writeValueAsString("OK!"),HttpStatus.OK);
         } catch (JsonProcessingException e) {
             log.error("unexpected exception",e);
