@@ -1,0 +1,10 @@
+server:
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,application/javascript,application/json
+    min-response-size: 1024
+  servlet:
+    contextPath: /oomtest
+  port: "8080"
+
+byteLength: 500000  # 500 Kbyte

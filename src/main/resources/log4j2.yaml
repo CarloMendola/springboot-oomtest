@@ -1,0 +1,14 @@
+Configuration:
+  name: default
+  Appenders:
+    Console:
+      name: Console
+      PatternLayout:
+        pattern: '[%d{ISO8601}] [%p] [%c:%L] - %m%n'
+      target: SYSTEM_OUT
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+      - ref: Console
+      
